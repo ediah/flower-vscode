@@ -1,0 +1,25 @@
+{
+    "name": "model-language",
+    "displayName": "Model Language",
+    "description": "Поддержка синтаксиса Модельного Языка Программирования для VSCode",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ml",
+            "aliases": ["Model Language", "ml"],
+            "extensions": [".ml",".mli"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ml",
+            "scopeName": "source.ml",
+            "path": "./syntaxes/ml.tmLanguage.json"
+        }]
+    }
+}

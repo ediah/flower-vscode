@@ -1,0 +1,100 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Model Language",
+	"patterns": [
+		{
+			"include": "#control_keywords"
+		},
+		{
+			"include": "#operator_keywords"
+		},
+		{
+			"include": "#other_keywords"
+		},
+		{
+			"include": "#function_entities"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"control_keywords": {
+			"patterns": [{
+				"name": "keyword.control.ml",
+				"match": "\\b(if|else|for|while|break|continue|goto|read|write|return)\\b"
+			}]
+		},
+		"operator_keywords": {
+			"patterns": [{
+				"name": "keyword.operator.ml",
+				"match": "\\+|\\-|\\*|\\/|%|=|!=|<|>|\\."
+			}]
+		},
+		"other_keywords": {
+			"patterns": [{
+				"name": "keyword.other.ml",
+				"match": "\\b(def|include)\\b"
+			}]
+		},
+		"function_call": {
+			"patterns": [{
+				"name": "entity.name.function.ml",
+				"match": "[A-Za-z]+(?=\\()"
+			}]
+		},
+		"function_entities": {
+			"patterns": [
+				{
+					"name": "entity.name.function.ml",
+					"match": "\\b(program)\\b"
+				},
+				{
+					"include": "#function_call"
+				}
+			]
+		},
+		"types": {
+			"patterns": [{
+				"name": "storage.type.ml",
+				"match": "\\b(int|real|string|bool|struct)\\b"
+			}]
+		},
+		"variables": {
+			"patterns": [{
+				"name": "variable.parameter.ml",
+				"match": "(?<=\\b\\(int|real|string|bool\\)\\b)\\s[A-Za-z]+(,\\s*[A-Za-z]+)*"
+			},{
+				"name": "variable.parameter.ml",
+				"match": "([A-Za-z]+)"
+			}]
+		},
+		"numbers": {
+			"patterns": [{
+				"name": "constant.numeric.ml",
+				"match": "[0-9]+"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.ml",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.ml",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.ml"
+}
