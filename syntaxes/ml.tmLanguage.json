@@ -3,62 +3,52 @@
 	"name": "Model Language",
 	"patterns": [
 		{
-			"include": "#control_keywords"
+			"include": "#keywords"
 		},
 		{
-			"include": "#operator_keywords"
-		},
-		{
-			"include": "#other_keywords"
-		},
-		{
-			"include": "#function_entities"
+			"include": "#entities"
 		},
 		{
 			"include": "#types"
-		},
-		{
-			"include": "#variables"
 		},
 		{
 			"include": "#numbers"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#comments"
 		}
 	],
 	"repository": {
-		"control_keywords": {
+		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.ml",
 				"match": "\\b(if|else|for|while|break|continue|goto|read|write|return)\\b"
-			}]
-		},
-		"operator_keywords": {
-			"patterns": [{
+			}, {
 				"name": "keyword.operator.ml",
-				"match": "\\+|\\-|\\*|\\/|%|=|!=|<|>|\\."
-			}]
-		},
-		"other_keywords": {
-			"patterns": [{
+				"match": "\\+|\\-|\\*|\\/|%|=|!=|<|>|\\.|\\b(or|and)\\b"
+			}, {
 				"name": "keyword.other.ml",
-				"match": "\\b(def|include)\\b"
+				"match": "\\b(def|include|thread)\\b"
 			}]
 		},
 		"function_call": {
 			"patterns": [{
 				"name": "entity.name.function.ml",
-				"match": "[A-Za-z]+(?=\\()"
+				"match": "[A-Za-z_]+(?=\\()"
 			}]
 		},
-		"function_entities": {
+		"entities": {
 			"patterns": [
 				{
 					"name": "entity.name.function.ml",
 					"match": "\\b(program)\\b"
-				},
-				{
+				}, {
+					"name": "entity.name.type.ml",
+					"match": "(?<=\\b(struct)\\b\\s)[A-Za-z]+"
+				}, {
 					"include": "#function_call"
 				}
 			]
@@ -67,15 +57,9 @@
 			"patterns": [{
 				"name": "storage.type.ml",
 				"match": "\\b(int|real|string|bool|struct)\\b"
-			}]
-		},
-		"variables": {
-			"patterns": [{
-				"name": "variable.parameter.ml",
-				"match": "(?<=\\b\\(int|real|string|bool\\)\\b)\\s[A-Za-z]+(,\\s*[A-Za-z]+)*"
-			},{
-				"name": "variable.parameter.ml",
-				"match": "([A-Za-z]+)"
+			}, {
+				"name": "storage.modifier.ml",
+				"match": "\\b(shared)\\b"
 			}]
 		},
 		"numbers": {
@@ -94,6 +78,11 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"comments": {
+			"name": "comment.block.ml",
+			"begin": "\\/\\*",
+			"end": "\\*\\/"
 		}
 	},
 	"scopeName": "source.ml"
